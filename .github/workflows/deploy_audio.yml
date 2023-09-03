@@ -14,7 +14,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Copiar arquivos de áudio
-        run: cp -r audios/* root/audios # pasta de saída do seu site no GitHub Pages
+        run: cp -r audios/* /root/audios # pasta de saída do seu site no GitHub Pages
 
       - name: Commit e push os arquivos de áudio
         run: |
