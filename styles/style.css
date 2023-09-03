@@ -1,3 +1,81 @@
-h1, h2 {
-    color:burlywood;
+h1{
+    color:brown;
+    font-size: 3em;
+    text-align: center;
+    border-bottom: 1px solid #333;
+    margin-bottom: 10px;
+}
+h2{
+    color:brown;
+    font-size: 2em;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+body{
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: burlywood;
+    
+}
+
+
+/* Estilos da lista de módulos */
+#moduleList {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+#moduleList li {
+    margin-bottom: 10px;
+}
+
+#moduleList a {
+    text-decoration: none;
+    background-color: burlywood;
+    border: 1px solid wheat;
+    color: wheat;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: block;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+#moduleList a:hover {
+    background-color: #333;
+}
+
+/* Estilos da lista de áudios */
+#audioList {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    text-align: center;
+}
+#audioList li {
+    margin-bottom: 10px;
+}
+#audioList a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+#audioList a:hover {
+    text-decoration: underline;
+}
+
+/* Estilos do player de áudio */
+#audioTitle {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 20px;
+    background-color: wheat;
+}
+
+#audioPlayer {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
 }

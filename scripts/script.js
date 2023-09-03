@@ -6,9 +6,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Lista de módulos e seus áudios correspondentes
   const modules = {
-    modulo1: ["audio_modulo1.mp3"],
-    modulo2: ["audio_modulo2.mp3"],
-    modulo3: ["audio_modulo3.mp3"],
+    Facil: ["audio_modulo1.mp3", "trompete.mp3", "violao.mp3"],
+    Intermediario: ["audio_modulo2.mp3", "trombone.mp3"],
+    Dificil: ["audio_modulo3.mp3", "pandeiro.mp3"],
   };
 
   // Função para exibir os áudios de um módulo
@@ -33,6 +33,14 @@ document.addEventListener("DOMContentLoaded", function () {
   // Adicione um evento de clique aos links dos módulos
   moduleList.addEventListener("click", (e) => {
     if (e.target.tagName === "A") {
+      const links = moduleList.querySelectorAll("a");
+      links.forEach((link) => {
+        link.style.backgroundColor = "";
+      });
+
+      //definindo a mudanca de cor
+      e.target.style.backgroundColor = "#333";
+
       const selectedModule = e.target.getAttribute("data-module");
       showAudios(selectedModule);
     }
