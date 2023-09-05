@@ -1,15 +1,27 @@
+import { apiUrl } from "./config.js";
+
 document.addEventListener("DOMContentLoaded", function () {
   const moduleList = document.getElementById("moduleList");
   const audioList = document.getElementById("audioList");
   const audioPlayer = document.getElementById("audioPlayer");
   const audioTitle = document.getElementById("audioTitle");
 
-  // Lista de módulos e seus áudios correspondentes
-  const modules = {
-    Facil: ["audio_modulo1.mp3", "trompete.mp3", "violao.mp3"],
-    Intermediario: ["audio_modulo2.mp3", "trombone.mp3"],
-    Dificil: ["audio_modulo3.mp3", "pandeiro.mp3"],
-  };
+  // Objeto vazio para armazenar os módulos e seus áudios
+  const modules = {};
+
+  // Função para fazer uma solicitação HTTP e preencher o objeto modules
+  async function fetchAudiosAndPopulateModules(module) {
+    try {
+      const response = await fetch(`${apiUrl}/audios/${module.toLowerCase()}`);
+      if (!response.ok) {
+        throw new Error("Não foi possível obter os áudios.");
+      }
+      const data = await response.json();
+      modules[module] = data;
+    } catch (error) {
+      console.error("Erro ao obter os áudios:", error);
+    }
+  }
 
   // Função para exibir os áudios de um módulo
   function showAudios(module) {
@@ -17,13 +29,13 @@ document.addEventListener("DOMContentLoaded", function () {
     modules[module].forEach((audio) => {
       const listItem = document.createElement("li");
       const audioLink = document.createElement("a");
-      audioLink.href = `audios/${module}/${audio}`;
-      audioLink.textContent = audio;
+      audioLink.href = `${apiUrl}/audio/${audio.filename}`;
+      audioLink.textContent = audio.originalname;
       audioLink.addEventListener("click", (e) => {
         e.preventDefault();
         audioPlayer.src = e.target.href;
         audioPlayer.play();
-        audioTitle.textContent = audio;
+        audioTitle.textContent = audio.originalname;
       });
       listItem.appendChild(audioLink);
       audioList.appendChild(listItem);
@@ -42,7 +54,13 @@ document.addEventListener("DOMContentLoaded", function () {
       e.target.style.backgroundColor = "#333";
 
       const selectedModule = e.target.getAttribute("data-module");
-      showAudios(selectedModule);
+      if (!modules[selectedModule]) {
+        fetchAudiosAndPopulateModules(selectedModule).then(() =>
+          showAudios(selectedModule)
+        );
+      } else {
+        showAudios(selectedModule);
+      }
     }
   });
 });

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Áudios</title>
+</head>
+<body>
+    <h1>Lista de Áudios</h1>
+    <ul id="audioList">
+        <!-- A lista de áudios será preenchida aqui -->
+    </ul>
+    <script src="scripts/script.js"></script>
+    <script>
+        // Função para carregar e exibir a lista de áudios
+        function loadAudioList() {
+            fetch('http://localhost:3000/audios/dificil') // Substitua com o URL da sua API
+                .then(response => response.json())
+                .then(data => {
+                    const audioList = document.getElementById('audioList');
+                    audioList.innerHTML = '';
+
+                    data.forEach(audio => {
+                        const listItem = document.createElement('li');
+                        listItem.innerHTML = `<a href="http://localhost:3000/audio/${audio.filename}" target="_blank">${audio.originalname}</a>`;
+                        audioList.appendChild(listItem);
+                    });
+                })
+                .catch(error => console.error('Erro ao carregar a lista de áudios:', error));
+        }
+
+        // Chama a função para carregar a lista de áudios quando a página carrega
+        window.onload = loadAudioList;
+    </script>
+</body>
+</html>
