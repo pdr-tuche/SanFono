@@ -1,3 +1,3 @@
-const apiUrl = "https://sanfono-bqr9c.ondigitalocean.app";
+const apiUrl = "https://sanfono-backend.onrender.com";
 
 export { apiUrl };
